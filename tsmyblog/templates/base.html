@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+
+    <title>Hello, world!</title>
+  </head>
+  <style>
+  .stuimg{
+    width: 100%;
+    
+  }
+  
+  /* .suar{
+    width:400px !important;
+  }  */
+  .cardmain{
+    width: 250px
+  }
+  
+  .suar{
+    margin-right: 30px;
+  }
+
+  .results-card{
+    position: absolute;
+	  z-index:1; 
+    top: 50px;
+	  background:#ffffff;
+	  max-height:260px;
+	  overflow:auto; 
+	  width:33.3%;
+	  box-shadow:0px 2px 4px #444; 
+    padding: 13px 13px;
+  }
+
+  @media only screen and (max-width: 600px) {
+  .suar{
+    width: 95%;
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-right: 3%;
+  }
+  .cardmain{
+    width: 47%;
+    height: fit-content
+  }
+  .results-card{
+    position: absolute;
+	  z-index:2; 
+    margin-top: 45px;
+	  background:#ffffff;
+	  max-height:260px;
+	  overflow:auto; 
+	  width:95%;
+	  box-shadow:0px 2px 4px #444; 
+    padding: 13px 13px;
+  }
+}
+</style>
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand " href="/">Placement Managment</a>
+      
+      
+      <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <!-- <form class="d-flex me-auto ">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> -->
+        
+        <ul class="navbar-nav ">
+
+          {% if user.is_authenticated %}
+            
+            <li class="nav-item mx-2">
+              <a class="nav-link" href="/blog/add_post" tabindex="-1" aria-disabled="true">Add Post</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link" href="{% url 'logout' %}" tabindex="-1" aria-disabled="true">Logout</a>
+            </li>
+
+          {% else %}
+
+            <li class="nav-item mx-2">
+              <a class="nav-link" href="{% url 'login' %}" tabindex="-1" aria-disabled="true">Login</a>
+            </li>
+             <li class="nav-item mx-2">
+              <a class="nav-link" href="{% url 'register' %}" tabindex="-1" aria-disabled="true">Register</a>
+            </li>
+          
+          {% endif %}
+
+          {% comment %} <li class="nav-item mx-2">
+            <a class="nav-link active" aria-current="page" href="/admin">Admin</a>
+          </li> {% endcomment %}
+          {% comment %} <li class="nav-item mx-2">
+            <a class="nav-link" href="/blog">Q & A</a>
+          </li> {% endcomment %}
+          
+          
+          
+          
+        </ul>
+        
+
+      </div>
+      
+
+    </div>
+    {% comment %} <form action="{% url 'search_event' %}" id="search-form" class="form-inline d-flex suar col-sm-4 " method="post">
+      {% csrf_token %}
+      <input class="form-control" id="search-input" type="search" autocomplete="off" placeholder="Search Id or Name"
+        aria-label="Search" name="searched" >
+      <button class="btn btn-light " type="submit" ><i class="fa fa-search" aria-hidden="true"></i></button> 
+      <div id="results-box" class="results-card invisible"></div> 
+      
+    </form> {% endcomment %}
+    
+    
+  </nav>
+    {% block content %}
+    
+    
+    
+    {% endblock %}
+    
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

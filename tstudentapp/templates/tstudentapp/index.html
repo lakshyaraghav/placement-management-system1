@@ -1,0 +1,330 @@
+{% extends 'tstudentapp/base.html' %}
+{% load static %}
+{% block title %}{% endblock title %}
+
+{% block script %}{% endblock script %}
+
+
+
+{% block body %}
+
+
+<style>
+    .ctr {
+        max-height: 600px;
+    }
+
+    .ctr img {
+        max-height: 600px;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        height: 44px;
+        width: 40px;
+        background: #7ac400;
+        margin: auto 0;
+        border-radius: 4px;
+        opacity: 0.8;
+        z-index:1
+    }
+
+
+    .lat {
+        bottom: -50px;
+    }
+
+    /* .cardmain{
+        width: 13rem;
+    } */
+</style>
+<div class="container-fluid ">
+    <h3 class="text-center">TOTAL VISITERS:{{count}}</h3>
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner ctr">
+            <div class="carousel-item active">
+                <img src="{% static 'tstudentapp/carousal4.jpg' %}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'tstudentapp/carousal5.jpg' %}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'tstudentapp/carousal6.jpg' %}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'tstudentapp/carousal 3.jpg' %}" class="d-block w-100" alt="...">
+            </div>
+        </div>
+
+        <button class="carousel-control-prev text-info" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next text-info" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+
+    </div>
+</div>
+
+<div class="container-fluid py-3"><br><br>
+    <h2 class="text-center">TOPPERS</h2><br>
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators lat">
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="Slide 1"></button>
+            {% for i in range %}
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{i}}"></button>
+            {% endfor %}
+
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row mx-auto justify-content-center scrolling-wrapper flex-row flex-nowrap overflow-auto">
+                    <div class="card text-center mb-3  border-1" style="width: 15rem;">
+                        <a href="/profileView/{{student_topper.0.id}}"> <img
+                                src="/media/{{student_topper.0.student_img}}" class="card-img-top" alt="..."></a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{student_topper.0.student_name}}</h5>
+                            <p class="card-text">{{student_topper.0.student_age}}</p>
+                            <a href="./services.html" class="btn btn-primary">VIEW MORE</a>
+                        </div>
+                    </div>
+
+                    {% for i in student_topper|slice:"1:" %}
+                    <div class="card text-center mb-3 border-1 cardmain">
+                        <a href="/profileView/{{i.id}}"> <img src="/media/{{i.student_img}}" class="card-img-top"
+                                alt="..."></a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{i.student_name}}</h5>
+                            <p class="card-text">{{i.student_age}}</p>
+                            <a href="./services.html" class="btn btn-primary">VIEW MORE</a>
+                            <h1>{{i.id}}</h1>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:5 and forloop.counter > 0 and not forloop.last%}
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="row mx-auto justify-content-center scrolling-wrapper flex-row flex-nowrap overflow-auto">
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+</div>
+
+
+{% comment %} <div class="container py-5">
+    <h1 class="text-center"> SEARCH STUDENT</h1>
+    <form method="GET" action=".">
+        <div class="form-row py-1">
+            <!-- <label for="exampleInputEmail1" class="form-label">Search by ID</label> -->
+            <input type="search" class="form-control" id="exampleInputEmail1" name="id" placeholder="contains ID">
+        </div>
+        <div class="form-row py-1">
+            <!-- <label for="exampleInputPassword1" class="form-label">Search by name</label> -->
+            <input type="search" class="form-control" id="exampleInputPassword1" name="uname"
+                placeholder="contains Name">
+        </div>
+        <div class="form-row py-1">
+            <!-- <label for="exampleInputPassword1" class="form-label">Search by name</label> -->
+            <select class="form-select" name="skills">
+                <option selected>choose skills..</option>
+                <option value="CSS">CSS</option>
+                <option value="HTML">HTML</option>
+                <option value="PHP">PHP</option>
+                <option value="Javascript">Javascript</option>
+                <option value="Angular">Angular</option>
+                <option value="node">node</option>
+
+            </select>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-2 col-lg-2 ">
+                <label for="category" class="form-label">Branch</label>
+                <select class="form-select" name="branch">
+                    <option selected>choose..</option>
+                    <option value="CS">CS</option>
+                    <option value="civil">civil</option>
+                    <option value="Mechanical">Mechanical</option>
+                </select>
+
+                </select>
+            </div>
+
+            <div class="form-group col-md-2 col-lg-2">
+                <label for="viewCountMin" class="form-label">Minimum 10th%</label>
+                <input type="number" min=0 class="form-control" id="viewCountMin" name="tenth_count_min"
+                    placeholder="0">
+            </div>
+            <div class="form-group col-md-2 col-lg-2">
+                <label for="viewCountMax" class="form-label">Minimum 12th%</label>
+                <input type="number" min=0 class="form-control" id="viewCountMax" name="twelth_count_min"
+                    placeholder="0">
+            </div>
+            <div class="form-group col-md-2 col-lg-2">
+                <label for="viewCountMax" class="form-label">Minimum diploma%</label>
+                <input type="number" min=0 class="form-control" id="viewCountMax" name="diploma_count_min"
+                    placeholder="0">
+            </div>
+            <div class="form-group col-md-2 col-lg-2">
+                <label for="viewCountMax" class="form-label">Minimum btech%</label>
+                <input type="number" min=0 class="form-control" id="viewCountMax" name="btech_count_min"
+                    placeholder="0">
+            </div>
+            <div class="form-group col-md-2 col-lg-2 ">
+                <label for="category" class="form-label">Achievement</label>
+                <select class="form-select" name="achievement">
+                    <option selected>choose..</option>
+                    <option value="National">National</option>
+
+
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <h1 class="text-center"><a href="#product"> ALL STUDENTS</a></h1>
+    <div id="product" class="col-lg-12 ">
+        <div class="row mx-auto justify-content-md-start">
+            {% for student_all in student_all %}
+            <div class="card mx-1 mb-3 border-1 cardmain">
+                <a href="/profileView/{{student_all.id}}"> <img src="/media/{{student_all.student_img}}"
+                        class="card-img-top" alt="..."></a>
+                <div class="card-body">
+                    <p class="card-title">{{student_all.student_name}} jklRaghav</p>
+                    <p class="card-text">{{student_all.student_age}}</p>
+                    <a href="./services.html" class="btn btn-primary">VIEW MORE</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div> {% endcomment %}
+
+<div class="container-fluid ">
+    <div class="row py-4">
+        <div class="col-lg-3">
+            <h5>Search Student</h5>
+            <hr>
+            <form method="GET" action=".">
+                <div class="form-row py-1">
+                    <!-- <label for="exampleInputEmail1" class="form-label">Search by ID</label> -->
+                    <input type="search" class="form-control" id="exampleInputEmail1" name="id" placeholder="contains ID">
+                </div>
+                <div class="form-row py-1">
+                    <!-- <label for="exampleInputPassword1" class="form-label">Search by name</label> -->
+                    <input type="search" class="form-control" id="exampleInputPassword1" name="uname"
+                        placeholder="contains Name">
+                </div>
+                <div class="form-row py-1">
+                    <!-- <label for="exampleInputPassword1" class="form-label">Search by name</label> -->
+                    <select class="form-select" name="skills">
+                        <option selected>choose skills..</option>
+                        <option value="CSS">CSS</option>
+                        <option value="HTML">HTML</option>
+                        <option value="PHP">PHP</option>
+                        <option value="Javascript">Javascript</option>
+                        <option value="Angular">Angular</option>
+                        <option value="node">node</option>
+        
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-6 ">
+                        <label for="category" class="form-label">Branch</label>
+                        <select class="form-select" name="branch">
+                            <option selected>choose..</option>
+                            <option value="CS">CS</option>
+                            <option value="civil">civil</option>
+                            <option value="Mechanical">Mechanical</option>
+                        </select>
+        
+                        </select>
+                    </div>
+        
+                    <div class="form-group col-lg-6">
+                        <label for="viewCountMin" class="form-label">Minimum 10th%</label>
+                        <input type="number" min=0 class="form-control" id="viewCountMin" name="tenth_count_min"
+                            placeholder="0">
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="viewCountMax" class="form-label">Minimum 12th%</label>
+                        <input type="number" min=0 class="form-control" id="viewCountMax" name="twelth_count_min"
+                            placeholder="0">
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="viewCountMax" class="form-label">Minimum diploma%</label>
+                        <input type="number" min=0 class="form-control" id="viewCountMax" name="diploma_count_min"
+                            placeholder="0">
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="viewCountMax" class="form-label">Minimum btech%</label>
+                        <input type="number" min=0 class="form-control" id="viewCountMax" name="btech_count_min"
+                            placeholder="0">
+                    </div>
+                    <div class="form-group col-lg-6 ">
+                        <label for="category" class="form-label">Achievement</label>
+                        <select class="form-select" name="achievement">
+                            <option selected>choose..</option>
+                            <option value="National">National</option>
+        
+        
+                        </select>
+                    </div>
+                </div>
+        
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="col-lg-9 ">
+            <h5 class="text-center" id="textChange">All Students</h5>
+            <hr>
+            <div id="product" class="col-lg-12 ">
+                <div class="row mx-auto justify-content-center">
+                    {% for student_all in student_all %}
+                    <div class="card mx-1 mb-3 border-1 cardmain">
+                        <a href="/profileView/{{student_all.id}}"> <img src="/media/{{student_all.student_img}}"
+                                class="card-img-top" alt="..."></a>
+                        <div class="card-body">
+                            <p class="card-title">{{student_all.student_name}} </p>
+                            <p class="card-text">{{student_all.student_age}}</p>
+                            <a href="./services.html" class="btn btn-primary">VIEW MORE</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock body%}

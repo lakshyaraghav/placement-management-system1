@@ -1,0 +1,45 @@
+{% extends 'tstudentapp/base.html' %}
+{% block body %}
+
+{% if searched %}
+<h1> you search for {{searched}}::</h1>
+<div class="container">
+    <div class="row">
+        {% for student_name in name %}
+        <div class="card mx-1 mb-3 border-1 cardmain">
+            <a href="/profileView/{{student_name.id}}"> <img src="/media/{{student_name.student_img}}"
+                    class="card-img-top" alt="..."></a>
+            <div class="card-body">
+                <p class="card-title">{{student_name.student_name}} </p>
+                <p class="card-text">{{student_name.student_age}}</p>
+                <a href="./services.html" class="btn btn-primary">VIEW MORE</a>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+{% for student_id in id_s %}
+<div class="card mx-1 mb-3 border-1 cardmain">
+    <a href="/profileView/{{student_id.id}}"> <img src="/media/{{student_id.student_img}}" class="card-img-top"
+            alt="..."></a>
+    <div class="card-body">
+        <p class="card-title">{{student_id.student_name}} </p>
+        <p class="card-text">{{student_id.student_age}}</p>
+        <a href="./services.html" class="btn btn-primary">VIEW MORE</a>
+    </div>
+</div>
+{% endfor %}
+
+{% else %}
+<h1> hey you forget to search....</h1>
+
+
+{% endif %}
+
+
+
+
+
+{% endblock body %}

@@ -1,0 +1,121 @@
+{% comment %} {% extends 'tstudentapp/base.html' %} {% endcomment %}
+
+{% comment %} {% block title %}{% endblock title %} {% endcomment %}
+
+{% comment %} {% block body %} {% endcomment %}
+{% load static %}
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+
+</head>
+
+<body>
+    <style>
+        .main {
+            text-align: center;
+           
+        }
+
+        .row {
+            font-size: x-large;
+        }
+
+       
+
+        .flex-container {
+            display: flex;
+        }
+
+        .flex-child {
+            flex: 1;
+            border: 2px solid yellow;
+        }
+
+        .flex-child:first-child {
+            margin-right: 20px;
+        }
+    </style>
+    <div class="container">
+        <h1 class="alert-danger text-center main">RESUME</h1>
+
+        <div class="col-sm-8 shadow p-5 offset-sm-2">
+
+            <div class="row ">
+                <div class="col-sm-5">
+                    <p>Application No: {{student.id}}</p>
+                    <img src="{{student.student_img.path}}" alt="Responsive image" class="img-fluid img-thumbnail mt-2"
+                        width="200" height="200">
+
+                    <br><br>
+                    <h1>{{student.student_name}}</h1>
+                    <p>{{student.student_branch}} Engineer</p>
+                    <br>
+                    <h5>PROFILE</h5>
+                    <p class="profile">{{student.student_profile}}</p>
+                    <br>
+                    <h5>PERSONAL SKILLS</h5>
+                    <p class="">{{student.personal_skills}}</p>
+                    <br>
+                    <h5>TECHANICAL SKILLS</h5>
+                    <p class="">{{student.technical_skills}}</p>
+                    <br>
+                    <h5>CONTACT INFORMATION</h5>
+                    <p class="cont">
+                        {{student.student_email}}<br>{{student.student_phone}}<br>{{student.student_address}}
+                    </p>
+                    <br><br>
+
+
+
+                </div>
+                <div class="col-sm-7 ">
+                    <h5 class="proj">PROJECT</h5>
+                    <p>Project title-{{student.student_project1}}<br>Project title-{{student.student_project2}}
+                        <br>Skills used-{{student.student_project_skills}}
+                    </p>
+                    <br>
+
+                    <h5 class="">QUALIFICATION</h5>
+                    <h6>{{student.student_tenth_schoolname}}</h6>
+                    <h6>HIGH SCHOOL</h6>
+                    <p>Completed high school with {{student.student_tenth}}% in CBSE board .</p><br>
+                    <h6>{{student.student_twelth_diploma_collegename}}</h6>
+                    <h6>Diploma</h6>
+                    <p>Completed diploma in computer science engineering with CPI {{student.student_diploma}}.</p><br>
+                    <h6>{{student.student_current_collegename}}</h6>
+                    <h6>Btech</h6>
+                    <p>Pursuing Btech in computer science engineering with CPI {{student.student_btech}}. </p><br>
+
+                    <h5 class="">PERSONAL INFORMATION</h5>
+                    <p>Date of birth- {{student.student_dob}} <br> Father 's name- Mr. {{student.student_fathername}}
+                    </p>
+
+                    <h5>DECLARATION</h5>
+                    <p>Declared that all information mentioned above is true.</p>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="flex-container">
+
+        <div class="flex-child magenta">
+            Flex Column 1
+        </div>
+
+        <div class="flex-child green">
+            Flex Column 2
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+{% comment %} {% endblock body%} {% endcomment %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+<h1>{{post.title}}</h1>
+{% if user.is_authenticated %}
+
+    <small>By: {{post.author.first_name}} 
+    {{post.author.last_name}}-
+    <a href="{% url 'update_post' post.pk %}">(Edit)</a></small>
+    
+    
+    
+{% endif %}
+
+<br>
+<hr>
+<br>
+{{post.body}}<br><br>
+<h5>Comments..</h5><br>
+{% if not post.comments.all %}
+    No Comments Yet...<a href="#">
+    Add One</a>
+{% else %}
+        {% for comment in post.comments.all %}
+            <strong>
+                {{comment.name}}-
+                {{comment.date_added}}
+            </strong>
+            <br>
+            {{comment.body}}
+        {% endfor %}
+{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,226 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+    crossorigin="anonymous" />
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
+  <title>{% block title %}{% endblock title %} STUDENT PORTAL</title>
+</head>
+<style>
+  .stuimg {
+    width: 100%;
+
+  }
+
+  /* .suar{
+    width:400px !important;
+  }  */
+  .cardmain {
+    width: 250px
+  }
+
+  .suar {
+    margin-right: 30px;
+  }
+
+  .results-card {
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+    background: #ffffff;
+    max-height: 260px;
+    overflow: auto;
+    width: 33.3%;
+    box-shadow: 0px 2px 4px #444;
+    padding: 13px 13px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .suar {
+      width: 95%;
+      margin-top: 1%;
+      margin-left: 2%;
+      margin-right: 3%;
+    }
+
+    .cardmain {
+      width: 47%;
+      height: fit-content
+    }
+
+    .results-card {
+      position: absolute;
+      z-index: 2;
+      margin-top: 45px;
+      background: #ffffff;
+      max-height: 260px;
+      overflow: auto;
+      width: 95%;
+      box-shadow: 0px 2px 4px #444;
+      padding: 13px 13px;
+    }
+  }
+</style>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand " href="/">Placement Management</a>
+
+
+      <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <!-- <form class="d-flex me-auto ">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> -->
+
+        <ul class="navbar-nav ">
+
+          <li class="nav-item mx-2">
+            <a class="nav-link active" aria-current="page" href="/admin">Admin</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="/blog">Question</a>
+          </li>
+          <!-- <li class="nav-item dropdown mx-2">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/contact">Contact</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li> -->
+          {% comment %} <li class="nav-item mx-2">
+            <a class="nav-link" href="/blog/add_post" tabindex="-1" aria-disabled="true">Add Post</a>
+          </li> {% endcomment %}
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="{% url 'register' %}" tabindex="-1" aria-disabled="true">Register</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="{% url 'login' %}" tabindex="-1" aria-disabled="true">Login</a>
+          </li>
+          <!-- <li class="nav-item mx-2">
+            <a class="nav-link" href="{% url 'logout' %}" tabindex="-1" aria-disabled="true">Logout</a>
+          </li> -->
+        </ul>
+
+
+      </div>
+
+
+    </div>
+    <form action="{% url 'search_event' %}" id="search-form" class="form-inline d-flex suar col-sm-4 " method="post">
+      {% csrf_token %}
+      <input class="form-control" id="search-input" type="search" autocomplete="off" placeholder="Search Id or Name"
+        aria-label="Search" name="searched">
+      <button class="btn btn-light " type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+      <div id="results-box" class="results-card invisible"></div>
+
+    </form>
+
+
+  </nav>
+  
+
+
+
+
+  {% block body %}
+
+  {% endblock body %}
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+
+  {% block script %}{% endblock script %}
+  
+  <script src="{% static 'tstudentapp/main.js' %}" defer></script>
+
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    -->
+</body>
+<footer id="footer" class="footer text-center bg-dark">
+  <div class="container">
+    <div class="row">
+      <!-- Footer Location-->
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <i class="fas fa-laptop-house   fa-2x"></i>
+        <h4 class="text-uppercase mb-4 text-white">Aligarh</h4>
+        <p class="lead mb-0 text-white">
+          B-1 new colony kasimpur power house,Aligarh
+          <br />
+          Uttar Pradesh, India
+        </p>
+      </div>
+      <!-- Footer Social Icons-->
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <h4 class="text-uppercase mb-4">Around the Web</h4>
+        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
+        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
+        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
+        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+      </div>
+      <!-- Footer About Text-->
+      <div class="col-lg-4">
+        <i class="fas fa-envelope-open-text fa-2x"></i>
+        <h5 class="text-uppercase text-white">E-mail</h5>
+        <p class="lead text-white"><a href="#!">
+            lakshyraghav123@gmail.com</a></br>
+            lakshyraghav123@gmail.com<br>
+
+          <!-- <a href="http://startbootstrap.com">Start Bootstrap</a>
+                  . -->
+        </p>
+
+        <i class="fas fa-phone-alt fa-2x"></i>
+        <h5 class="text-uppercase text-white">Phone</h5>
+        <p class="lead text-white">
+          +91 9999108147<br>
+          +91 9999696160
+          <!-- <a href="http://startbootstrap.com">Start Bootstrap</a>
+                  . -->
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- Copyright Section-->
+<div class="copyright py-4 text-center text-white">
+  <div class="container"><small>Copyright &copy; excellentsurvey.in</small><br><small>2018-2021</small></div>
+</div>
+
+</html>
